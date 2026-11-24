@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donna's Cuddly Quilts</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donna's Cuddly Quilts</title>
-    <!-- Add this line to import the font -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Coming+Soon&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Patrick+Hand&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -38,7 +34,6 @@
         }
 
         header p {
-            //font-family: 'Trebuchet MS', Arial, sans-serif;
             font-size: 60px;
             margin: 4px 0 0;
             font-weight: 400;
@@ -58,6 +53,14 @@
             .header-logo {
                 height: 40px;
                 right: 10px;
+            }
+
+            header h1 {
+                font-size: 70px;
+            }
+
+            header p {
+                font-size: 36px;
             }
         }
 
@@ -170,7 +173,11 @@
             padding: 20px;
             margin-top: 40px;
             font-family: 'Amatic SC', cursive;
-            font-weight: 300;
+            font-weight: 400;
+        }
+
+        .contact a {
+            color: #4b0f4b;
         }
 
         button {
@@ -214,22 +221,22 @@
             <h2>My Latest Creations</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="images/quilt1.png" alt="Quilt 1">
+                    <img src="images/quilt1.png" alt="Two babies napping on a lime green, teal and pink patchwork quilt with flamingo squares" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/quilt2.png" alt="Quilt 2">
+                    <img src="images/quilt2.png" alt="Farm-themed patchwork quilt with tractors, cow print and red gingham" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/quilt3.png" alt="Quilt 3">
+                    <img src="images/quilt3.png" alt="Safari patchwork quilt with lions, elephants, giraffe print and yellow gingham" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/quilt4.png" alt="Quilt 4">
+                    <img src="images/quilt4.png" alt="Bright cupcake patchwork quilt with pink, lime and polka dot squares and a lemon print back" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/quilt5.png" alt="Quilt 5">
+                    <img src="images/quilt5.png" alt="Pink, black and cow print patchwork quilt with little cow squares" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/quilt6.png" alt="Quilt 6">
+                    <img src="images/quilt6.png" alt="Baby in a lemon sleeper lying on a lemon print quilt" loading="lazy">
                 </div>
             </div>
         </div>
@@ -245,12 +252,12 @@
 
                  <div class="form-group">
                     <label for="email">Your email:</label>
-                    <input type="text" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required>
                 </div>
 
                  <div class="form-group">
-                    <label for="phone">Your phone number:</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <label for="phone">Your phone number (optional):</label>
+                    <input type="tel" id="phone" name="phone">
                 </div>
 
                    <div class="form-group">
@@ -266,23 +273,22 @@
                
                 <div class="form-group">
                     <label for="message">What designs or styles do you have in mind? Anything else you'd like to share?</label>
-                    <textarea id="message" name="message" rows="4" ></textarea>
+                    <textarea id="message" name="message" rows="4" required></textarea>
                 </div>
-                
-                <button id="send-btn" type="button">Send Message</button>
+
+                <button id="send-btn" type="submit">Send Message</button>
             </form>
 
             <script>
         // build and open a mailto: link from the form values
           function openMailClient() {
-            const to = 'contact[at]cuddlyquilts.com';
+            const to = 'donnascuddlyquilts@gmail.com';
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const recepient = document.getElementById('recepient').value.trim();
-            const date = document.getElementById('date').value.trim();
             const dateValue = document.getElementById('date').value; // YYYY-MM-DD from input[type=date]
-            // format date as DD/MM/YYYY or use 'Flexible' when empty
+            // format date as MM/DD/YYYY or use 'Flexible' when empty
                let formattedDate;
             if (dateValue) {
                const parts = dateValue.split('-');
@@ -296,11 +302,6 @@
                formattedDate = 'Flexible';
            }
             const message = document.getElementById('message').value.trim();
-
-            if (!name || !email || !message) {
-                alert('Please fill in Name, Email, and Message.');
-                return;
-            }
 
             const subject = encodeURIComponent(`Quilt mail from ${name}`);
             const bodyLines = [
@@ -320,10 +321,7 @@
             window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
         }
 
-        const sendBtn = document.getElementById('send-btn');
-        if (sendBtn) sendBtn.addEventListener('click', openMailClient);
-
-        // fallback: handle form submit if user presses Enter
+        // the browser checks the required fields first, then fires 'submit'
         const form = document.querySelector('.contact-form');
         if (form) {
             form.addEventListener('submit', function (e) {
@@ -334,13 +332,13 @@
     </script> 
 
             <div style="margin-top: 30px;">
-                <p>Email: </p>
+                <p>Email: <a href="mailto:donnascuddlyquilts@gmail.com">donnascuddlyquilts@gmail.com</a></p>
             </div> 
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Donna's Cuddly Quilts </p>
+        <p>&copy; 2026 Donna's Cuddly Quilts </p>
     </footer>
 </body>
 </html>
